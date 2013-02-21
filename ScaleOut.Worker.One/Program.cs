@@ -12,6 +12,11 @@ namespace ScaleOut.Worker
             Console.WriteLine("Consumer: " + ConfigurationManager.AppSettings["worker"]);
             Bus.Initialize(sbc =>
             {
+             /*   sbc.UseMsmq();
+                sbc.VerifyMsmqConfiguration();
+                sbc.UseMulticastSubscriptionClient();
+                sbc.ReceiveFrom("msmq://localhost/test_queue_worker");*/
+
                 sbc.UseRabbitMq();
                 sbc.ReceiveFrom("rabbitmq://localhost/test_queue_worker");
                 sbc.Subscribe(subs =>
@@ -23,6 +28,8 @@ namespace ScaleOut.Worker
                     subs.Handler(del);
                 });
             });
+
+            Console.ReadLine();
         }
     }
 }

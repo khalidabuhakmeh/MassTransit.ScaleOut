@@ -11,6 +11,11 @@ namespace ScaleOut.Publisher
         {
             Bus.Initialize(cfg =>
             {
+               /* cfg.UseMsmq();
+                cfg.VerifyMsmqConfiguration();
+                cfg.UseMulticastSubscriptionClient();
+                cfg.ReceiveFrom("msmq://localhost/test_queue");*/
+                
                 cfg.UseRabbitMq();
                 cfg.ReceiveFrom("rabbitmq://localhost/test_queue");
             });
